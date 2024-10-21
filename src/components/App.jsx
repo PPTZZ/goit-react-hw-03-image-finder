@@ -1,3 +1,4 @@
+import images from '../services/returnData';
 import ImageGallery from './ImageGallery';
 import Loader from './Loader';
 import SearchBar from './SearchBar';
@@ -14,32 +15,28 @@ export default class App extends Component {
     per_page: 12,
   };
 
-  handleSearch = e => {
-    this.setState({ filter: e.target.value });
+  handleLoader(){
+    this.setState(prevState => ({ isLoading: !prevState.isLoading }));
   };
 
-  handleLoader = () => {
-    this.setState(state => ({ isLoading: !state.isLoading }));
-  };
-
-  handleImages = data => {
-    this.setState({ images: data.hits });
-    console.log(data.hits);
-    
-    
-  };
-
-  
-
+  async getImages() {
+    try {
+      this.handleLoader();
+      const response = await images.getData();
+      console.log(response.data.hits);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.handleLoader();
+    }
+  }
+  async componentDidMount() {
+    this.getImages();
+  }
   render() {
     return (
       <>
         <SearchBar
-          filter={this.state.filter}
-          loading={this.handleLoader}
-          onSearch={this.handleSearch}
-          retrieveImages={this.handleImages}
-
         />
         <Loader loading={this.state.isLoading} />
         {this.state.images.length > 0 ? (
