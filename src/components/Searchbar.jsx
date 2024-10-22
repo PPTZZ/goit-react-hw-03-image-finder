@@ -12,9 +12,9 @@ export default class SearchBar extends Component {
     if(e.code !== 'Enter'){
       return
     }
-    const inputData = e.target.value;
-    this.setState({searchWord:inputData})
-    this.reset();
+    this.setState({searchWord:''});
+    this.setState({searchWord:e.target.value});
+    
   }
   componentDidUpdate(prevProps,prevState){
     if (prevState.searchWord !== this.state.searchWord){
