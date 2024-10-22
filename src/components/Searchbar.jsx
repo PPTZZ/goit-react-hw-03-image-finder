@@ -14,12 +14,12 @@ export default class SearchBar extends Component {
     }
     const inputData = e.target.value;
     this.setState({searchWord:inputData})
-    console.log(this.state.searchWord);
+    this.reset();
   }
-
-  componentDidUpdate(){
-    console.log('update');
-    
+  componentDidUpdate(prevProps,prevState){
+    if (prevState.searchWord !== this.state.searchWord){
+      this.props.onSearch(this.state.searchWord)
+    }
   }
 
   render() {
@@ -59,9 +59,9 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  filter: PropTypes.string,
   onSearch: PropTypes.func,
   page: PropTypes.number,
-  retrieveImages: PropTypes.func,
-  onLoader: PropTypes.func,
+  per_page: PropTypes.number,
+  getImages: PropTypes.func,
+  onHandleImages: PropTypes.func,
 };
