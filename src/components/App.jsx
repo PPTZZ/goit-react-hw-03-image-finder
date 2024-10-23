@@ -16,7 +16,6 @@ export default class App extends Component {
 			prevState.page !== this.state.page
 		) {
 			try {
-				console.log('fetching data');
 				this.handleLoader();
 				const response = await axios.get(
 					`${END_POINT}?key=${KEY}&q=${this.state.filter}&safesearch=true&page=${this.state.page}&per_page=${this.state.per_page}`

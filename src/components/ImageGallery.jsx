@@ -17,7 +17,7 @@ const ImageGallery = ({ images, loadMore,handleModal,setModalImg }) => {
 						width: '100%',
 						gridTemplateColumns:
 							'repeat(auto-fill,minmax(280px, 1fr))!important',
-						overflowX: 'hidden',
+						overflow: 'hidden',
 					}}
 				>
 					{images.map((image) => (
